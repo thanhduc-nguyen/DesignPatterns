@@ -16,6 +16,12 @@ director.BuildAHouseWithFullAmenities();
 var house2 = houseBuilder.GetArchitecture();
 house2.ShowOff();
 
+var bluePrintBuilder = new BluePrintBuilder();
+director.Builder = bluePrintBuilder;
+director.BuildABluePrint();
+var bluePrint1 = bluePrintBuilder.GetBluePrint();
+bluePrint1.GetInformation();
+
 // Builder not using Director
 var castleBuilder = new CastleBuilder();
 castleBuilder.BuildRooms(20);

@@ -21,17 +21,36 @@
     }
 
     /// <summary>
-    /// Product 1.
+    /// Product A1.
     /// </summary>
     public class House : Architecture
     {
     }
 
     /// <summary>
-    /// Product 2.
+    /// Product A2.
     /// </summary>
     public class Castle : Architecture
     {
+    }
+
+    /// <summary>
+    /// Product B.
+    /// </summary>
+    public class BluePrint
+    {
+        public int NumberOfRooms { get; set; }
+        public bool Garage { get; set; }
+        public bool Statues { get; set; }
+        public bool Garden { get; set; }
+        public bool SwimmingPool { get; set; }
+        public void GetInformation()
+        {
+            Console.WriteLine("=======================================");
+            Console.WriteLine($"Information in this blueprint: This architecture consists of {NumberOfRooms} rooms, {(Garage ? "with a garage," : "")} " +
+                $"{(Statues ? "some fancy statues," : "")} {(Garden ? "a garden," : "")} {(SwimmingPool ? "and a swimming pool." : "")}");
+            Console.WriteLine("=======================================\n");
+        }
     }
 
     /// <summary>
@@ -45,11 +64,10 @@
         public void BuildFancyStatues();
         public void BuildGarden();
         public void BuildSwimmingPool();
-        public Architecture GetArchitecture();
     }
 
     /// <summary>
-    /// Concreate Builder 1.
+    /// Concreate Builder A1.
     /// </summary>
     public class HouseBuilder : IBuilder
     {
@@ -99,7 +117,7 @@
     }
 
     /// <summary>
-    /// Concreate Builder 2.
+    /// Concreate Builder A2.
     /// </summary>
     public class CastleBuilder : IBuilder
     {
@@ -149,6 +167,56 @@
     }
 
     /// <summary>
+    /// Concreate Builder B.
+    /// </summary>
+    public class BluePrintBuilder : IBuilder
+    {
+        private BluePrint _bluePrint = new BluePrint();
+
+        public BluePrintBuilder()
+        {
+            Reset();
+        }
+
+        public void Reset()
+        {
+            _bluePrint = new BluePrint();
+        }
+
+        public void BuildRooms(int number)
+        {
+            _bluePrint.NumberOfRooms = number;
+        }
+
+        public void BuildGarage()
+        {
+            _bluePrint.Garage = true;
+        }
+
+        public void BuildFancyStatues()
+        {
+            _bluePrint.Statues = true;
+        }
+
+        public void BuildGarden()
+        {
+            _bluePrint.Garden = true;
+        }
+
+        public void BuildSwimmingPool()
+        {
+            _bluePrint.SwimmingPool = true;
+        }
+
+        public BluePrint GetBluePrint()
+        {
+            var result = _bluePrint;
+            Reset();
+            return result;
+        }
+    }
+
+    /// <summary>
     /// Director.
     /// </summary>
     public class Director
@@ -169,6 +237,15 @@
         public void BuildAHouseWithFullAmenities()
         {
             _builder.BuildRooms(6);
+            _builder.BuildGarage();
+            _builder.BuildGarden();
+            _builder.BuildFancyStatues();
+            _builder.BuildSwimmingPool();
+        }
+
+        public void BuildABluePrint()
+        {
+            _builder.BuildRooms(3);
             _builder.BuildGarage();
             _builder.BuildGarden();
             _builder.BuildFancyStatues();
