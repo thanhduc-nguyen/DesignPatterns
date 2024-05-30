@@ -3,7 +3,7 @@
     public class WeatherData : ISubject
     {
         private List<IObserver> _observers;
-        
+
         private float temperature;
         private float humidity;
         private float pressure;
