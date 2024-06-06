@@ -4,7 +4,7 @@
     {
         public DarkRoast()
         {
-            Description = "Dark Roast";
+            Description = $"Dark Roast";
         }
 
 

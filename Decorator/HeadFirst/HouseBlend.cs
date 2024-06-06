@@ -4,7 +4,8 @@
     {
         public HouseBlend()
         {
-            Description = "House Blend Coffee";
+            Size = Size.Venti;
+            Description = $"House Blend Coffee with Size: {Size}";
         }
 
         public override double Cost() => 0.89;

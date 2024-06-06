@@ -11,6 +11,7 @@
         }
 
         public override string Description { get; set; }
+        public override Size Size { get; set; }
 
         public override double Cost()
         {
