@@ -1,4 +1,4 @@
-﻿namespace FactoryMethod
+﻿namespace FactoryMethod.RefactoringGuru
 {
     /// <summary>
     /// Product.
