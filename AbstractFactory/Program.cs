@@ -19,14 +19,11 @@ Console.WriteLine();
 Console.WriteLine("Refactoring Guru");
 Console.WriteLine("================\n");
 
-void ClientMethod(IFurnitureFactory furnitureFactory)
-{
-    var mordenChair = furnitureFactory.CreateChair();
-    mordenChair.HasLegs();
+var roadLogistics = new RoadLogistics();
+var seaLogistics = new SeaLogistics();
 
-    var modernCoffeeTable = furnitureFactory.CreateCoffeeTable();
-    modernCoffeeTable.SitOn();
-}
+var client = new Client(roadLogistics);
+client.getLogistics();
 
-
-ClientMethod(new ModernFurnitureFactory());
+client.Transport.Deliver();
+client.Payment.Pay();

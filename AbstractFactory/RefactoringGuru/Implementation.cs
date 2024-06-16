@@ -3,123 +3,138 @@
     /// <summary>
     /// Abstract Product A.
     /// </summary>
-    public interface IChair
+    public interface ITransport
     {
-        public void HasLegs();
-        public void SitOn();
+        public void Deliver();
     }
 
     /// <summary>
     /// Concrete Product A1.
     /// </summary>
-    public class VictorianChair : IChair
+    public class Truck : ITransport
     {
-        public void HasLegs()
-        {
-            Console.WriteLine("VictorianChair has 4 legs");
-        }
+        public int Id { get; set; } = Random.Shared.Next(100);
 
-        public void SitOn()
+        public void Deliver()
         {
-            Console.WriteLine("Sitting on VictorianChair");
+            Console.WriteLine("Deliver by land in a box.");
         }
     }
 
     /// <summary>
     /// Concrete Product A2.
     /// </summary>
-    public class ModernChair : IChair
+    public class Ship : ITransport
     {
-        public void HasLegs()
-        {
-            Console.WriteLine("ModernChair has no legs");
-        }
+        public int Id { get; set; } = Random.Shared.Next(100);
 
-        public void SitOn()
+        public void Deliver()
         {
-            Console.WriteLine("Sitting on ModernChair");
+            Console.WriteLine("Deliver by sea in a container.");
         }
     }
 
     /// <summary>
     /// Abstract Product B.
     /// </summary>
-    public interface ICoffeTable
+    public interface IPayment
     {
-        public void HasLegs();
-        public void SitOn();
+        public void Pay();
     }
 
     /// <summary>
     /// Concrete Product B1.
     /// </summary>
-    public class VictorianCoffeTable : ICoffeTable
+    public class Cash : IPayment
     {
-        public void HasLegs()
-        {
-            Console.WriteLine("VictorianCoffeTable has 4 legs");
-        }
+        public int Id { get; set; } = Random.Shared.Next(100);
 
-        public void SitOn()
+        public void Pay()
         {
-            Console.WriteLine("VictorianCoffeTable is not for sitting.");
+            Console.WriteLine("Pay by Cash.");
         }
     }
 
     /// <summary>
     /// Concrete Product B2.
     /// </summary>
-    public class ModernCoffeeTable : ICoffeTable
+    public class CreditCard : IPayment
     {
-        public void HasLegs()
-        {
-            Console.WriteLine("ModernCoffeeTable has 4 legs");
-        }
+        public int Id { get; set; } = Random.Shared.Next(100);
 
-        public void SitOn()
+        public void Pay()
         {
-            Console.WriteLine("ModernCoffeeTable is not for sitting.");
+            Console.WriteLine("Pay by credit card.");
         }
     }
 
     /// <summary>
     /// Abstract Factory.
     /// </summary>
-    public interface IFurnitureFactory
+    public abstract class Logistics
     {
-        public IChair CreateChair();
-        public ICoffeTable CreateCoffeeTable();
-    }
+        /// <summary>
+        /// Factory Method 1.
+        /// </summary>
+        public abstract ITransport CreateTransport();
 
-    /// <summary>
-    /// Concreate Factory 1.
-    /// </summary>
-    public class ModernFurnitureFactory : IFurnitureFactory
-    {
-        public IChair CreateChair()
-        {
-            return new ModernChair();
-        }
+        /// <summary>
+        /// Factory Method 2.
+        /// </summary>
+        public abstract IPayment CreatePayment();
 
-        public ICoffeTable CreateCoffeeTable()
+        /// <summary>
+        /// Another operation of Logistics.
+        /// </summary>
+        public void SomeOperation()
         {
-            return new ModernCoffeeTable();
         }
     }
 
     /// <summary>
-    /// Concreate Factory 2.
+    /// Concrete Creator A.
     /// </summary>
-    public class VictorianFurnitureFactory : IFurnitureFactory
+    public class RoadLogistics : Logistics
     {
-        public IChair CreateChair()
+        public override Truck CreateTransport()
         {
-            return new VictorianChair();
+            return new Truck();
         }
 
-        public ICoffeTable CreateCoffeeTable()
+        public override IPayment CreatePayment()
         {
-            return new VictorianCoffeTable();
+            return new Cash();
+        }
+    }
+
+    /// <summary>
+    /// Concrete Creator B.
+    /// </summary>
+    public class SeaLogistics : Logistics
+    {
+        public override Ship CreateTransport()
+        {
+            return new Ship();
+        }
+
+        public override IPayment CreatePayment()
+        {
+            return new CreditCard();
+        }
+    }
+
+    /// <summary>
+    /// Client of the Abstract Factory.
+    /// </summary>
+    internal class Client(Logistics logistics)
+    {
+        public ITransport Transport { get; set; }
+        public IPayment Payment { get; set; }
+
+        public void getLogistics()
+        {
+            Transport = logistics.CreateTransport();
+            Payment = logistics.CreatePayment();
         }
     }
 }
