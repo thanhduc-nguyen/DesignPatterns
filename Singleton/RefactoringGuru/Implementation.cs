@@ -1,4 +1,4 @@
-﻿namespace Singleton
+﻿namespace Singleton.RefactoringGuru
 {
     public class Database
     {
