@@ -2,11 +2,11 @@
 
 namespace Command.HeadFirst.Commands
 {
-    public class GarageDoorOpenCommand(GarageDoor garageDoor) : ICommand
+    public class StereoOffCommand(Stereo stereo) : ICommand
     {
         public void Execute()
         {
-            garageDoor.Up();
+            stereo.Off();
         }
     }
 }
