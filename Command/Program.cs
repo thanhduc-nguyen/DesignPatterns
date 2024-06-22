@@ -11,9 +11,15 @@ internal class Program
         Console.WriteLine("Head First Design Pattern");
         Console.WriteLine("=========================\n");
 
-        // SimpleRemoteControl();
+        // RunSimpleRemoteControl();
 
-        // RemoteControl();
+        // RunRemoteControl();
+
+        // RunRemoteControlWithUndo();
+
+        // RunRemoteControlWithUndo2();
+
+        RunRemoteControlWithPartyMode();
 
         //Console.WriteLine();
         //Console.WriteLine("Refactoring Guru");
@@ -21,7 +27,7 @@ internal class Program
 
     }
 
-    private static void SimpleRemoteControl()
+    private static void RunSimpleRemoteControl()
     {
         var simpleRemoteControl = new SimpleRemoteControl();
         Light light = new("");
@@ -32,7 +38,7 @@ internal class Program
         simpleRemoteControl.ButtonWasPress();
     }
 
-    private static void RemoteControl()
+    private static void RunRemoteControl()
     {
         RemoteControl remoteControl = new();
         Light livingRoomLight = new("Living Room");
@@ -64,5 +70,83 @@ internal class Program
         remoteControl.OffButtonWasPushed(2);
         remoteControl.OnButtonWasPushed(3);
         remoteControl.OffButtonWasPushed(3);
+    }
+
+    private static void RunRemoteControlWithUndo()
+    {
+        RemoteControlWithUndo remoteControl = new();
+        Light livingRoomLight = new("Living Room");
+        LightOnCommand livingRoomLightOn = new(livingRoomLight);
+        LightOffCommand livingRoomLightOff = new(livingRoomLight);
+
+        remoteControl.SetCommand(0, livingRoomLightOn, livingRoomLightOff);
+        remoteControl.OnButtonWasPushed(0);
+        remoteControl.OffButtonWasPushed(0);
+
+        Console.WriteLine(remoteControl);
+
+        remoteControl.UndoButtonWasPushed();
+        remoteControl.OffButtonWasPushed(0);
+        remoteControl.OnButtonWasPushed(0);
+
+        Console.WriteLine(remoteControl);
+        remoteControl.UndoButtonWasPushed();
+    }
+
+    private static void RunRemoteControlWithUndo2()
+    {
+        RemoteControlWithUndo remoteControl = new();
+        CeilingFan ceilingFan = new("Living Room");
+        CeilingFanMediumCommand ceilingFanMedium = new(ceilingFan);
+        CeilingFanHighCommand ceilingFanHigh = new(ceilingFan);
+        CeilingFanOffCommand ceilingFanOff = new(ceilingFan);
+        
+        remoteControl.SetCommand(0, ceilingFanMedium, ceilingFanOff);
+        remoteControl.SetCommand(1, ceilingFanHigh, ceilingFanOff);
+        remoteControl.OnButtonWasPushed(0);
+        remoteControl.OffButtonWasPushed(0);
+        
+        Console.WriteLine(remoteControl);
+        
+        remoteControl.UndoButtonWasPushed();
+        remoteControl.OnButtonWasPushed(1);
+
+        Console.WriteLine(remoteControl);
+        
+        remoteControl.UndoButtonWasPushed();
+    }
+
+    private static void RunRemoteControlWithPartyMode()
+    {
+        Light light = new("Living Room");
+        TV tv = new("Living Room");
+        Stereo stereo = new("Living Room");
+        Hottub hottub = new();
+
+        LightOnCommand lightOn = new(light);
+        StereoOnCommand stereoOn = new(stereo);
+        TVOnCommand tvOn = new(tv);
+        HottubOnCommand hottubOn = new(hottub);
+
+        LightOffCommand lightOff = new(light);
+        StereoOffCommand stereoOff = new(stereo);
+        TVOffCommand hottubOff = new(tv);
+        HottubOffCommand tvOff = new(hottub);
+
+        ICommand[] partyOn = { lightOn, stereoOn, tvOn, hottubOn };
+        ICommand[] partyOff = { lightOff, stereoOff, tvOff, hottubOff };
+        MacroCommand partyOnMacro = new(partyOn);
+        MacroCommand partyOffMacro = new(partyOff);
+
+        RemoteControlWithUndo remoteControl = new();
+        remoteControl.SetCommand(0, partyOnMacro, partyOffMacro);
+
+        Console.WriteLine(remoteControl);
+        Console.WriteLine("\n---Pushing Macro On---");
+        remoteControl.OnButtonWasPushed(0);
+        Console.WriteLine("\n---Pushing Macro Off---");
+        remoteControl.OffButtonWasPushed(0);
+        Console.WriteLine("\n---Pushing Undo---");
+        remoteControl.UndoButtonWasPushed();
     }
 }

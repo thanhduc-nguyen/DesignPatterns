@@ -2,16 +2,16 @@
 
 namespace Command.HeadFirst.Commands
 {
-    public class StereoOffCommand(Stereo stereo) : ICommand
+    public class StereoOnCommand(Stereo stereo) : ICommand
     {
         public void Execute()
         {
-            stereo.Off();
+            stereo.On();
         }
 
         public void Undo()
         {
-            stereo.On();
+            stereo.Off();
         }
     }
 }

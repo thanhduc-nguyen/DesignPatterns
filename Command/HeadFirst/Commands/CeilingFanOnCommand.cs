@@ -8,5 +8,10 @@ namespace Command.HeadFirst.Commands
         {
             ceilingFan.High();
         }
+
+        public void Undo()
+        {
+            ceilingFan.Off();
+        }
     }
 }

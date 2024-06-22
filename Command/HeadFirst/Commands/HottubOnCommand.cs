@@ -2,16 +2,18 @@
 
 namespace Command.HeadFirst.Commands
 {
-    public class StereoOffCommand(Stereo stereo) : ICommand
+    public class HottubOnCommand(Hottub hottub) : ICommand
     {
         public void Execute()
         {
-            stereo.Off();
+            hottub.On();
+            hottub.SetTemperature(104);
+            hottub.Circulate();
         }
 
         public void Undo()
         {
-            stereo.On();
+            hottub.Off();
         }
     }
 }

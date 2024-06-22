@@ -8,5 +8,10 @@ namespace Command.HeadFirst.Commands
         {
             light.Off();
         }
+
+        public void Undo()
+        {
+            light.On();
+        }
     }
 }

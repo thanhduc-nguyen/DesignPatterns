@@ -10,5 +10,10 @@ namespace Command.HeadFirst.Commands
             stereo.SetCD();
             stereo.SetVolume(11);
         }
+
+        public void Undo()
+        {
+            stereo.Off();
+        }
     }
 }

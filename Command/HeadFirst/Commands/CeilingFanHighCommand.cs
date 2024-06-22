@@ -2,14 +2,14 @@
 
 namespace Command.HeadFirst.Commands
 {
-    public class CeilingFanOffCommand(CeilingFan ceilingFan) : ICommand
+    public class CeilingFanHighCommand(CeilingFan ceilingFan) : ICommand
     {
         private int prevSpeed;
 
         public void Execute()
         {
             prevSpeed = ceilingFan.GetSpeed();
-            ceilingFan.Off();
+            ceilingFan.High();
         }
 
         public void Undo()

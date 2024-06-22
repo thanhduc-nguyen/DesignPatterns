@@ -8,5 +8,10 @@ namespace Command.HeadFirst.Commands
         {
             garageDoor.Down();
         }
+
+        public void Undo()
+        {
+            garageDoor.Up();
+        }
     }
 }
