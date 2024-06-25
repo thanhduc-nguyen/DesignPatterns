@@ -1,4 +1,4 @@
-﻿namespace Adapter.ObjectAdapterImplementation
+﻿namespace Adapter.RefactoringGuru.ClassAdapterImplementation
 {
     public class StockModel
     {
@@ -39,13 +39,11 @@
     /// <summary>
     /// Adapter.
     /// </summary>
-    public class VietnameseStockAdapter : IStockAdapter
+    public class VietnameseStockAdapter : StockProvider, IStockAdapter
     {
-        public StockProvider StockProvider { get; set; } = new StockProvider();
-
         public IEnumerable<VietnameseStockModel> GetData()
         {
-            return StockProvider.FetchData().Select(x => new VietnameseStockModel
+            return FetchData().Select(x => new VietnameseStockModel
             {
                 Company = x.Company,
                 PriceInVnd = decimal.Multiply(x.PriceInUsd, 23000M),
