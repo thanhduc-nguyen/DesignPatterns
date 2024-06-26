@@ -1,6 +1,10 @@
 ﻿using Command.HeadFirst.Commands;
 using Command.HeadFirst.Invokers;
 using Command.HeadFirst.Receivers;
+using Command.RefactoringGuru;
+using Command.RefactoringGuru.Commands;
+using Command.RefactoringGuru.Invokers;
+using Command.RefactoringGuru.Receiver;
 
 internal class Program
 {
@@ -21,10 +25,26 @@ internal class Program
 
         RunRemoteControlWithPartyMode();
 
-        //Console.WriteLine();
-        //Console.WriteLine("Refactoring Guru");
-        //Console.WriteLine("================\n");
+        Console.WriteLine();
+        Console.WriteLine("Refactoring Guru");
+        Console.WriteLine("================\n");
 
+        Application application = new();
+        Editor editor = new();
+        application.SetCommand(new CopyCommand(editor));
+        application.SetCommand(new CutCommand(editor));
+        application.SetCommand(new PasteCommand(editor));
+        application.SetCommand(new UndoCommand(editor));
+
+        editor.GetSelection("Pattern");
+        application.ExecuteCommand(1);
+        application.ExecuteCommand(3);
+        editor.GetSelection("awesome");
+        application.ExecuteCommand(1);
+        editor.PotisionToInsert = 0;
+        application.ExecuteCommand(2);
+        application.ExecuteCommand(3);
+        application.ExecuteCommand(3);
     }
 
     private static void RunSimpleRemoteControl()
@@ -100,19 +120,19 @@ internal class Program
         CeilingFanMediumCommand ceilingFanMedium = new(ceilingFan);
         CeilingFanHighCommand ceilingFanHigh = new(ceilingFan);
         CeilingFanOffCommand ceilingFanOff = new(ceilingFan);
-        
+
         remoteControl.SetCommand(0, ceilingFanMedium, ceilingFanOff);
         remoteControl.SetCommand(1, ceilingFanHigh, ceilingFanOff);
         remoteControl.OnButtonWasPushed(0);
         remoteControl.OffButtonWasPushed(0);
-        
+
         Console.WriteLine(remoteControl);
-        
+
         remoteControl.UndoButtonWasPushed();
         remoteControl.OnButtonWasPushed(1);
 
         Console.WriteLine(remoteControl);
-        
+
         remoteControl.UndoButtonWasPushed();
     }
 
