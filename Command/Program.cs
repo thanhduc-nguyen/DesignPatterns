@@ -1,7 +1,6 @@
 ﻿using Command.HeadFirst.Commands;
 using Command.HeadFirst.Invokers;
 using Command.HeadFirst.Receivers;
-using Command.RefactoringGuru;
 using Command.RefactoringGuru.Commands;
 using Command.RefactoringGuru.Invokers;
 using Command.RefactoringGuru.Receiver;

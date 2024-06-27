@@ -13,7 +13,7 @@ namespace Command.HeadFirst.Invokers
             _onCommands = new ICommand[7];
             _offCommands = new ICommand[7];
             ICommand noCommand = new NoCommand();
-           
+
             for (int i = 0; i < 7; i++)
             {
                 _onCommands[i] = noCommand;
@@ -39,7 +39,7 @@ namespace Command.HeadFirst.Invokers
 
         public override string ToString()
         {
-            StringBuilder stringBuilder = new ();
+            StringBuilder stringBuilder = new();
             stringBuilder.Append("\n------ Remote Control------\n");
             for (int i = 0; i < _onCommands.Length; i++)
             {

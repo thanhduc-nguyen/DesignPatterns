@@ -14,7 +14,7 @@
 
         public void Undo()
         {
-            foreach(var command in _commands)
+            foreach (var command in _commands)
             {
                 command.Undo();
             }
