@@ -1,4 +1,5 @@
 ﻿using State.HeadFirst;
+using State.RefactoringGuru;
 
 Console.Title = "State";
 
@@ -43,3 +44,23 @@ gumballMachine.InsertQuarter();
 gumballMachine.TurnCrank();
 
 Console.WriteLine(gumballMachine);
+
+Console.WriteLine();
+Console.WriteLine("Refactoring Guru");
+Console.WriteLine("================\n");
+
+Document document = new Document();
+document.PublishedByUser();
+document.RejectedByAdmin();
+
+Console.WriteLine(document.State.ToString());
+
+document.PublishedByAdmin();
+
+Console.WriteLine(document.State.ToString());
+
+document.BackToDraft();
+document.PublishedByUser();
+document.ApprovedByAdmin();
+
+Console.WriteLine(document.State.ToString());
