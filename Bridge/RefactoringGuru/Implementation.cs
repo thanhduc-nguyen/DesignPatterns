@@ -1,4 +1,4 @@
-﻿namespace Bridge
+﻿namespace Bridge.RefactoringGuru
 {
     /// <summary>
     /// Abstraction.
@@ -14,7 +14,7 @@
     /// </summary>
     public interface IColor
     {
-        string Paint();
+        string Coloring();
     }
 
     /// <summary>
@@ -31,7 +31,7 @@
 
         public override void Paint()
         {
-            Color = _color.Paint();
+            Color = _color.Coloring();
         }
     }
 
@@ -49,7 +49,7 @@
 
         public override void Paint()
         {
-            Color = _color.Paint();
+            Color = _color.Coloring();
         }
     }
 
@@ -58,7 +58,7 @@
     /// </summary>
     public class RedColor : IColor
     {
-        public string Paint()
+        public string Coloring()
         {
             return "Red";
         }
@@ -69,7 +69,7 @@
     /// </summary>
     public class BlueColor : IColor
     {
-        public string Paint()
+        public string Coloring()
         {
             return "Blue";
         }
