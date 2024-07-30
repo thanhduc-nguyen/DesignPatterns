@@ -1,4 +1,4 @@
-﻿namespace Memento.RefactoringGuru.NestedClasses
+﻿namespace Memento.RefactoringGuru
 {
     /// <summary>
     /// Memento.

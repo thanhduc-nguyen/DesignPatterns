@@ -1,6 +1,6 @@
 ﻿namespace Memento.RefactoringGuru
 {
-    public class CareTaker
+    public class CareTaker : IObserver
     {
         private static readonly Lazy<CareTaker> _instance = new Lazy<CareTaker>(() => new CareTaker());
         private Hero _hero;
@@ -27,12 +27,19 @@
         {
             var snapshot = _hero.Save();
             _snapshots.Push(snapshot);
+            Console.WriteLine("A snapshot added.");
         }
 
         public void Undo()
         {
+            _snapshots.Pop();
             var snapshot = _snapshots.Pop();
             _hero.Restore(snapshot);
+        }
+
+        public void Update()
+        {
+            CreateBackup();
         }
     }
 }
