@@ -1,4 +1,6 @@
-﻿namespace Prototype.HeadFirst
+﻿using System.Text.Json;
+
+namespace Prototype.HeadFirst
 {
     public class DynamicPlayerGeneratedMonster : Monster
     {
@@ -18,9 +20,15 @@
             };
         }
 
-        public override Monster Clone()
+        public override Monster Clone(bool deepClone)
         {
-            return new DynamicPlayerGeneratedMonster(this);
+            if (deepClone)
+            {
+                var objectAsJson = JsonSerializer.Serialize(this);
+                return JsonSerializer.Deserialize<DynamicPlayerGeneratedMonster>(objectAsJson) ?? new DynamicPlayerGeneratedMonster();
+            }
+
+            return (DynamicPlayerGeneratedMonster)MemberwiseClone();
         }
     }
 }

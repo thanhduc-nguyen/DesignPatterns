@@ -78,17 +78,17 @@
             _monsters.Add(monster);
         }
 
-        public IEnumerable<Monster> CloneMonstersByType(string type)
+        public IEnumerable<Monster> CloneMonstersByType(string type, bool deepClone = false)
         {
             foreach (var monster in _monsters)
             {
                 if (type.Equals(nameof(WellKnownMonster)) && monster is WellKnownMonster)
                 {
-                    yield return monster.Clone();
+                    yield return monster.Clone(deepClone);
                 }
                 else if (type.Equals(nameof(DynamicPlayerGeneratedMonster)) && (monster is DynamicPlayerGeneratedMonster))
                 {
-                    yield return monster.Clone();
+                    yield return monster.Clone(deepClone);
                 }
             }
         }

@@ -7,6 +7,6 @@
         public int Level { get; set; }
         public Ability Ability { get; set; }
 
-        public abstract Monster Clone();
+        public abstract Monster Clone(bool deepClone);
     }
 }
